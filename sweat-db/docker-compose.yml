@@ -5,9 +5,10 @@ services:
     image: 'bitnami/mongodb:7.0.6'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
-      - MONGODB_REPLICA_SET_MODE=primary
+#      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGO_INITDB_ROOT_USERNAME=root
       - MONGODB_ROOT_PASSWORD=secret
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+#      - MONGODB_REPLICA_SET_KEY=replicasetkey123
     ports:
       - "27017:27017"
     networks:

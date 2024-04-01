@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"omidh70/sweat-db/util"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -15,15 +16,14 @@ type mongoHandler struct {
 	db     *mongo.Database
 }
 
-func NewMongoHandler(cfg DBConfig) (NoSQL, error) {
+func NewMongoHandler(cfg util.Config) (Store, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.Timeout)
 	defer cancel()
 
-	//"%s://%s:%s@mongodb-primary,mongodb-secondary,mongodb-arbiter/?replicaSet=replicaset",
+	//"mongodb://user:pass@mongodb-primary,mongodb-secondary,mongodb-arbiter/?replicaSet=replicaset",
 	uri := fmt.Sprintf(
-		"%s://%s:%s",
-		"mongodb",
+		"mongodb://root:secret@%s:%s",
 		cfg.DBHost,
 		cfg.DBPort,
 	)
@@ -47,7 +47,7 @@ func NewMongoHandler(cfg DBConfig) (NoSQL, error) {
 	}, nil
 }
 
-func (m mongoHandler) Insert(ctx context.Context, collection string, data any) error {
+func (m mongoHandler) Store(ctx context.Context, collection string, data any) error {
 	if _, err := m.db.Collection(collection).InsertOne(ctx, data); err != nil {
 		return err
 	}

@@ -1,6 +1,8 @@
 package util
 
 import (
+	"time"
+
 	"github.com/spf13/viper"
 )
 
@@ -8,10 +10,14 @@ type Config struct {
 	Env string `mapstructure:"ENVIRONMENT"`
 	// DBDriver             string        `mapstructure:"DB_DRIVER"`
 	// DBSource             string        `mapstructure:"DB_SOURCE"`
+	DBName  string        `mapstructure:"DB_NAME"`
+	Timeout time.Duration `mapstructure:"DB_CONN_TIMEOUT"`
+	DBHost  string        `mapstructure:"DB_HOST"`
+	DBPort  string        `mapstructure:"DB_PORT"`
 	// MigrationSrc         string        `mapstructure:"MIGRATION_FILE"`
 	// RedisAddr            string        `mapstructure:"REDIS_ADDRESS"`
 	// HttpServerAddress    string        `mapstructure:"HTTP_SERVER_ADDRESS"`
-	// GRPCServerAddress    string        `mapstructure:"GRPC_SERVER_ADDRESS"`
+	GRPCServerAddress string `mapstructure:"GRPC_SERVER_ADDRESS"`
 	// TokenSymmetricKey    string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
 	// AccessTokenDuration  time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
 	// RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`

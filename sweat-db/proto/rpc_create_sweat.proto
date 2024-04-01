@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "sweat-db/pb";
+
+message CreateSweatRequest{
+    string uuid = 1;
+}
+
+message CreateSweatResponse{
+    string uuid = 1;
+}
+
+service Greeter {
+    // Sends a greeting
+    rpc SayHello (CreateSweatRequest) returns (CreateSweatResponse) {}
+    rpc SayBye (CreateSweatRequest) returns (CreateSweatResponse) {}
+  }
+  
